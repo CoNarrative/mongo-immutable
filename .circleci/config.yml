@@ -1,0 +1,67 @@
+version: 2.0
+
+jobs:
+  checkout-code:
+    docker:
+      - image: node:8.4.0
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: save SHA to a file
+          command: echo $CIRCLE_SHA1 > ~/repo/.circle-sha
+      - save_cache:
+          key: v1-repo-{{ checksum "~/repo/.circle-sha" }}
+          paths:
+             - ~/repo
+  build-api:
+    docker:
+      - image: node:8.4.0
+    working_directory: ~/repo/api
+    steps:
+      - run:
+          name: save SHA to a file
+          command: echo $CIRCLE_SHA1 > ~/repo/.circle-sha
+      - restore_cache:
+          keys:
+            - v1-repo-{{ checksum "~/repo/.circle-sha" }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+  test-api:
+    docker:
+      - image: node:8.4.0
+    working_directory: ~/repo/api
+    steps:
+      - run:
+          name: save SHA to a file
+          command: echo $CIRCLE_SHA1 > ~/repo/.circle-sha
+      - restore_cache:
+          keys:
+            - v1-repo-{{ checksum "~/repo/.circle-sha" }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Run tests and generate coverage report
+          command: npm run coverage
+      - run:
+          name: Upload coverage report to codecov.io
+          command: bash <(curl -s https://codecov.io/bash)
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - checkout-code
+      - build-api:
+          requires:
+            - checkout-code
+      - test-api:
+          requires:
+            - build-api

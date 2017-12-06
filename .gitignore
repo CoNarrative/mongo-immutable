@@ -1,3 +1,5 @@
 .idea
+.nyc_output
+coverage.lcov
 node_modules
 target
