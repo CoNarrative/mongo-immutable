@@ -14,10 +14,10 @@ jobs:
           key: v1-repo-{{ checksum "~/repo/.circle-sha" }}
           paths:
              - ~/repo
-  build-api:
+  build:
     docker:
       - image: node:8.4.0
-    working_directory: ~/repo/api
+    working_directory: ~/repo
     steps:
       - run:
           name: save SHA to a file
@@ -26,18 +26,18 @@ jobs:
           keys:
             - v1-repo-{{ checksum "~/repo/.circle-sha" }}
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dep-cache-{{ checksum "~/repo/package.json" }}
       - run:
           name: Install dependencies
           command: npm install
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dep-cache-{{ checksum "~/repo/package.json" }}
           paths:
             - node_modules
-  test-api:
+  test:
     docker:
       - image: node:8.4.0
-    working_directory: ~/repo/api
+    working_directory: ~/repo
     steps:
       - run:
           name: save SHA to a file
@@ -46,7 +46,7 @@ jobs:
           keys:
             - v1-repo-{{ checksum "~/repo/.circle-sha" }}
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dep-cache-{{ checksum "~/repo/package.json" }}
       - run:
           name: Run tests and generate coverage report
           command: npm run coverage
@@ -59,9 +59,9 @@ workflows:
   build-and-test:
     jobs:
       - checkout-code
-      - build-api:
+      - build:
           requires:
             - checkout-code
-      - test-api:
+      - test:
           requires:
-            - build-api
+            - build
