@@ -1,0 +1,40 @@
+{
+  "name": "mongo-immutable",
+  "version": "0.0.1",
+  "description": "Immutable MongoDB.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tsc && ./node_modules/.bin/mocha target/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoNarrative/mongo-immutable.git"
+  },
+  "keywords": [
+    "mongo",
+    "mongodb",
+    "immutable"
+  ],
+  "author": "CoNarrative",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/CoNarrative/mongo-immutable/issues"
+  },
+  "homepage": "https://github.com/CoNarrative/mongo-immutable#readme",
+  "dependencies": {
+    "boom": "^7.1.1",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "@types/boom": "^4.3.8",
+    "@types/chai": "^4.0.8",
+    "@types/mocha": "^2.2.44",
+    "@types/mongodb": "^2.2.16",
+    "@types/node": "^8.0.55",
+    "chai": "^4.1.2",
+    "mocha": "3.5.3",
+    "ognom": "0.0.1",
+    "typescript": "^2.6.2",
+    "uuid": "^3.1.0"
+  }
+}
