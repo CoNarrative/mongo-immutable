@@ -9,8 +9,8 @@ Implementation is naive and does not enforce locking, which Mongo only natively 
 
 ## createOne
 ## createMany
-## deleteOne
-## deleteMany
+## deleteLatestOne
+## deleteLatestMany
 ## findLatestOne
 ## findLatestMany
 ## findLatestOneAndUpdate
