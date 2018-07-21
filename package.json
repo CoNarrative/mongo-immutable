@@ -4,7 +4,7 @@
   "description": "Immutable MongoDB.",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/tsc && ./node_modules/.bin/mocha target/test",
+    "test": "node_modules/.bin/tsc && ./node_modules/.bin/mocha target/test --exit",
     "coverage": "node_modules/.bin/nyc npm test && node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov"
   },
   "repository": {
@@ -27,16 +27,16 @@
     "lodash": "^4.17.10"
   },
   "devDependencies": {
-    "@types/boom": "^4.3.8",
-    "@types/chai": "^4.0.8",
-    "@types/mocha": "^2.2.44",
+    "@types/boom": "^7.2.0",
+    "@types/chai": "^4.1.4",
+    "@types/mocha": "^5.2.5",
     "@types/mongodb": "^2.2.16",
-    "@types/node": "^8.0.55",
+    "@types/node": "^10.5.2",
     "chai": "^4.1.2",
-    "mocha": "3.5.3",
-    "nyc": "^11.3.0",
-    "ognom": "0.0.1",
-    "typescript": "^2.6.2",
+    "mocha": "5.2.0",
+    "nyc": "^12.0.2",
+    "ognom": "0.1.0",
+    "typescript": "^2.9.2",
     "uuid": "^3.1.0"
   },
   "nyc": {
