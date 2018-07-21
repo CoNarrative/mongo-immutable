@@ -1,4 +1,4 @@
-# mongo-immutable
+# mongo-immutable [![CircleCI](https://img.shields.io/circleci/project/github/CoNarrative/mongo-immutable.svg)]() [![Codecov](https://img.shields.io/codecov/c/github/CoNarrative/mongo-immutable.svg)]()
 Immutable MongoDB.
 
 The library is a collection of drop-in replacement methods for NodeJS mongodb API that allow mongodb to be used as an immutable database.
@@ -17,10 +17,10 @@ Inserts a versioned document into the database capable of being read and modifie
 ## createMany
 Inserts versioned documents in to the database capable of being read and modified by other library functions.
 
-## deleteOne
+## deleteLatestOne
 Inserts a versioned document matching the query and marks it as removed. The document remains in the database but library functions stop interacting with it.
 
-## deleteMany
+## deleteLatestMany
 Inserts versioned documents matching the query and marks them as removed. All documents remain in the database but library functions stop interacting with them.
 
 ## findLatestOne
